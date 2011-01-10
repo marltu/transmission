@@ -214,6 +214,7 @@ event_read_cb( int fd, short event UNUSED, void * vio )
     const unsigned int max = 256 * 1024;
 
     assert( tr_isPeerIo( io ) );
+    assert( io->socket >= 0 );
 
     io->pendingEvents &= ~EV_READ;
 
@@ -289,6 +290,7 @@ event_write_cb( int fd, short event UNUSED, void * vio )
     const tr_direction dir = TR_UP;
 
     assert( tr_isPeerIo( io ) );
+    assert( io->socket >= 0 );
 
     io->pendingEvents &= ~EV_WRITE;
 
