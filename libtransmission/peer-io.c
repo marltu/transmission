@@ -392,6 +392,7 @@ utp_on_write(void *closure, unsigned char *buf, size_t buflen)
     rc = evbuffer_remove( io->outbuf, buf, buflen );
     if( rc < (long)buflen ) {
         tr_nerr( "UTP", "Short write: %d < %ld", rc, (long)buflen);
+        UTP_Close( io->utp_socket );
     }
 }
 
