@@ -3577,7 +3577,8 @@ initiateConnection( tr_peerMgr * mgr, Torrent * t, struct peer_atom * atom )
                                &atom->addr,
                                atom->port,
                                t->tor->info.hash,
-                               t->tor->completeness == TR_SEED );
+                               t->tor->completeness == TR_SEED,
+                               0 );
 
     if( io == NULL )
     {
