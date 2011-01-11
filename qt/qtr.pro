@@ -17,12 +17,12 @@ PKGCONFIG = fontconfig libcurl openssl dbus-1
 
 # if you have libevent2 installed in a custom path, specify it here
 EVENT_TOP = /usr
-INCLUDEPATH = $${EVENT_TOP}/include $${INCLUDEPATH}
 
 TRANSMISSION_TOP = ..
+INCLUDEPATH = $${EVENT_TOP}/include $${INCLUDEPATH}
 INCLUDEPATH += $${TRANSMISSION_TOP}
 LIBS += $${TRANSMISSION_TOP}/libtransmission/libtransmission.a
-LIBS += $${TRANSMISSION_TOP}/third-party/dht/libutp.a
+LIBS += $${TRANSMISSION_TOP}/third-party/libutp/libutp.a
 LIBS += $${TRANSMISSION_TOP}/third-party/dht/libdht.a
 LIBS += $${TRANSMISSION_TOP}/third-party/miniupnp/libminiupnp.a
 LIBS += $${TRANSMISSION_TOP}/third-party/libnatpmp/libnatpmp.a
