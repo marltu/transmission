@@ -1482,6 +1482,7 @@ onPeerViewQueryTooltip( GtkWidget   * widget,
                 case 'X': s = _( "Peer was discovered through Peer Exchange (PEX)" ); break;
                 case 'H': s = _( "Peer was discovered through DHT" ); break;
                 case 'I': s = _( "Peer is an incoming connection" ); break;
+                case 'T': s = _( "Peer is connected over µTP" ); break;
             }
             if( s )
                 g_string_append_printf( gstr, "%c: %s\n", *pch, s );
