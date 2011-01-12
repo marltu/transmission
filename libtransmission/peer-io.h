@@ -71,6 +71,7 @@ typedef struct tr_peerIo
     tr_bool               extendedProtocolSupported;
     tr_bool               fastExtensionSupported;
     tr_bool               dhtSupported;
+    tr_bool               utpSupported;
 
     /* we create the socket in a nonblocking way, so this flag is initially
      * false and then set to true when libevent says that the socket is ready
@@ -178,6 +179,11 @@ static inline void tr_peerIoEnableDHT( tr_peerIo * io, tr_bool flag )
     io->dhtSupported = flag;
 }
 static inline tr_bool tr_peerIoSupportsDHT( const tr_peerIo * io )
+{
+    return io->dhtSupported;
+}
+
+static inline tr_bool tr_peerIoSupportsUTP( const tr_peerIo * io )
 {
     return io->dhtSupported;
 }
