@@ -1149,6 +1149,11 @@ static int
 tr_peerIoTryWrite( tr_peerIo * io, size_t howmuch )
 {
     int n = 0;
+    const size_t old_len = evbuffer_get_length( io->outbuf );
+    dbgmsg( io, "in tr_peerIoTryWrite %zu", howmuch );
+
+    if( howmuch > old_len )
+        howmuch = old_len;
 
     if(( howmuch = tr_bandwidthClamp( &io->bandwidth, TR_UP, howmuch )))
     {
@@ -1194,7 +1199,7 @@ tr_peerIoFlush( tr_peerIo  * io, tr_direction dir, size_t limit )
     assert( tr_isPeerIo( io ) );
     assert( tr_isDirection( dir ) );
 
-    if( io->hasFinishedConnecting )
+    if( io->hasFinishedConnecting || ( io->utp_socket != NULL ) )
     {
         if( dir == TR_DOWN )
             bytesUsed = tr_peerIoTryRead( io, limit );
