@@ -712,6 +712,27 @@ render_full( TorrentCellRenderer   * cell,
     g_object_set( text_renderer, "text", status, NULL );
     gtk_cell_renderer_render( text_renderer, window, widget, &stat_area, &stat_area, &stat_area, flags );
 
+    /* PIECES */
+    {
+        cairo_t *cr = gdk_cairo_create(window);
+        int8_t * tab = malloc(inf->pieceCount * sizeof(int8_t));
+        double piece_w = prct_area.width / (double) inf->pieceCount;
+
+        tr_torrentAvailability(tor, tab, inf->pieceCount);
+
+        cairo_set_line_width(cr, piece_w);
+        for (tr_piece_index_t i = 0; i < inf->pieceCount; i++) {
+            if (tab[i] == -1) {
+                cairo_move_to(cr, prct_area.x + i * piece_w, prct_area.y + prct_area.height);
+                cairo_line_to(cr, prct_area.x + i * piece_w, prct_area.y + prct_area.height + 5);
+                cairo_stroke(cr);
+            }
+        }
+        cairo_destroy(cr);
+
+        free(tab);
+    }
+
     /* cleanup */
     g_free( status );
     g_free( progress );
